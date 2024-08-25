@@ -1,16 +1,20 @@
 import settings
 import random
+import math
 import discord
 from discord.ext import commands
+from codebusters.codebuster import *
 
 
 logger = settings.logging.getLogger("bot")
-
+puzzles = {}
 
 
 def run():
     intents = discord.Intents.default()
-    intents.message_content = True 
+    intents.message_content = True
+    intents.members = True
+    intents.presences = True
     
     bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
     
@@ -30,8 +34,24 @@ def run():
     
     @bot.command()
     async def help(ctx):
-        await ctx.send("Hello! 👋🏼\nI'm the cryptogram bot here to help **codebusters** ✅\n\nHere are the **main** commands:\n    **!freq** [letter] displays the **frequency** of a letter\n    **!freq all** displays the all **frequency** of letters\n    **!word** [word] displays the **frequency** of a word")
+        commands = ["!freq [letter]|displays the **frequency** of a letter", "!freq all|displays the all **frequency** of letters", "!word [word]|displays the **frequency** of a word", "!new|creates a new puzzle", "!puzzle|displays current puzzle"]
+        txt = "Hello! 👋🏼\nI'm the cryptogram bot here to help **codebusters** ✅\n\nHere are the **main** commands:\n"
         
+        most = 0
+        for i in commands:
+            l = i.split("|")
+            len_of = len(l[0])
+            if len_of > most:
+                most = len_of
+                
+        for i in commands:
+            l = i.split("|")
+            spacing = (most+8) - len(l[0])
+            to_space = lambda x: "".join(["  " for k in range(x)])
+            
+            txt += "**" + l[0] + "**" + to_space(spacing) + l[1] + '\n'
+            
+        await ctx.send(txt)
 
 
     bot.run(settings.DISCORD_API_SECRET, root_logger=True)

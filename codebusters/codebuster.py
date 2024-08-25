@@ -177,6 +177,10 @@ def quote_to_code(quote):
     return [quote.lower(), dict(map(reversed, key.items()))]
 
 
+def code_to_text(code):
+    return code[0].upper()+'\n'
+
+
 def get_freq(cryptogram):
     freq = {}
     for i in ALPHABET:
@@ -184,6 +188,36 @@ def get_freq(cryptogram):
     
     return freq
         
+
+def disp_freq(freq):
+    txt_dict = {}
+    counter = 0
+    for i in freq:
+        if freq[i] != 0:
+            spacing = ""
+            for j in range(3-len(str(freq[i]))):
+                spacing += " "
+                
+            if counter in txt_dict:
+                txt_dict[counter] += f"    **{i.upper()}**: {freq[i]}" + spacing
+            else:
+                txt_dict[counter] = f"**{i.upper()}**: {freq[i]}" + spacing
+            
+            counter += 1
+            
+            if counter == 5:
+                counter = 0
+    
+    txt = ""
+    for i in txt_dict:
+        txt += txt_dict[i] + "\n"
+        
+    return txt
+
+
+def disp(puzzle):
+    return f"{code_to_text(puzzle)}\n{disp_freq(get_freq(puzzle))}"
+
 
 def get_quotes_of_diff(diff_min, diff_max):
     return list(filter(lambda x: round(x['difficulty']) in range(diff_min, diff_max), quotes))

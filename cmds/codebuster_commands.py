@@ -3,6 +3,8 @@ sys.path.append("../")
 from codebusters.codebuster import *
 from discord.ext import commands
 from main import puzzles
+from main import solved
+
 
 @commands.command()
 async def freq(ctx, letter):
@@ -23,11 +25,13 @@ async def word(ctx, word):
 @commands.command()
 async def new(ctx):
     global puzzles
+    global solved
     username = f"{ctx.message.author.name}"
     
     if username not in puzzles:
         puzzles[username] = quote_to_code(random.choice(quotes)['text'])
-        await ctx.send(disp(puzzles[username]))
+        solved[username] = new_solve(puzzles[username])
+        await ctx.send(disp(puzzles[username], solved[username]))
     else:
         await ctx.send("You are already in a **puzzle**!\nCheck it with **!puzzle**")
         
@@ -35,13 +39,44 @@ async def new(ctx):
 @commands.command()
 async def puzzle(ctx):
     global puzzles
+    global solved
     username = f"{ctx.message.author.name}"
     
     if username not in puzzles:
         await ctx.send("You need to create a **puzzle** first!\nUse **!new**")
     else:
         puzzle = puzzles[username]
-        await ctx.send(disp(puzzle))
+        await ctx.send(disp(puzzle, solved[username]))
+        
+
+@commands.command()
+async def solve(ctx, a: str, b: str):
+    global puzzles
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0]] = b[0]
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username]))
+        
+
+@commands.command()
+async def undo(ctx, letter: str):
+    global puzzles
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][letter[0]] = "_"
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username]))
         
      
 async def setup(bot):
@@ -49,3 +84,5 @@ async def setup(bot):
     bot.add_command(word)
     bot.add_command(new)
     bot.add_command(puzzle)
+    bot.add_command(solve)
+    bot.add_command(undo)

@@ -157,6 +157,33 @@ def get_difficulty(freq_of_words, avg_word_length, dev_letter_freq, length, ones
     return math.sqrt((negative * negative_weight) / (positive * positive_weight)) * 1
 
 
+def new_solve(cryptogram):
+    solve = {}
+    for i in ALPHABET:
+        solve[i] = "_"
+    
+    solve_string = ""
+    for char in cryptogram[0]:
+        if char in ALPHABET:
+            solve_string += solve[char]
+        else:
+            solve_string += char
+    solve_string += "\n"
+    return [solve, solve_string] 
+
+
+def update_solve(solve, cryptogram):
+    solve_string = ""
+    for char in cryptogram[0]:
+        if char in ALPHABET:
+            solve_string += solve[0][char]
+        else:
+            solve_string += char
+    solve_string += "\n"
+
+    return [solve[0], solve_string]
+
+
 def quote_to_code(quote):
     key = {}
     
@@ -199,9 +226,9 @@ def disp_freq(freq):
                 spacing += " "
                 
             if counter in txt_dict:
-                txt_dict[counter] += f"    **{i.upper()}**: {freq[i]}" + spacing
+                txt_dict[counter] += f"    `**`{i.upper()}`**`: {freq[i]}" + spacing
             else:
-                txt_dict[counter] = f"**{i.upper()}**: {freq[i]}" + spacing
+                txt_dict[counter] = f"`**`{i.upper()}`**`: {freq[i]}" + spacing
             
             counter += 1
             
@@ -215,8 +242,8 @@ def disp_freq(freq):
     return txt
 
 
-def disp(puzzle):
-    return f"{code_to_text(puzzle)}\n{disp_freq(get_freq(puzzle))}"
+def disp(puzzle, solved):
+    return f"`{code_to_text(puzzle)}{solved[1].upper()}\n{disp_freq(get_freq(puzzle))}`"
 
 
 def get_quotes_of_diff(diff_min, diff_max):

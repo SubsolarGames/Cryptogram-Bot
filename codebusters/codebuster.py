@@ -204,6 +204,17 @@ def quote_to_code(quote):
     return [quote.lower(), dict(map(reversed, key.items()))]
 
 
+def check_win(cryptogram, solve):
+    done_i = []
+    for i in cryptogram[0]:
+        if i not in done_i and i in ALPHABET:
+            if cryptogram[1][i] != solve[0][i]:
+                return False
+            done_i.append(i)
+        
+    return True
+
+
 def code_to_text(code):
     return code[0].upper()+'\n'
 
@@ -248,7 +259,7 @@ def disp(puzzle, solved):
 
 def get_quotes_of_diff(diff_min, diff_max):
     return list(filter(lambda x: round(x['difficulty']) in range(diff_min, diff_max), quotes))
-    
+
     
 def read_txt(f):
     global quotes

@@ -1,0 +1,12 @@
+[X] Add reset command
+[X] Add show hint
+[X] Add win state for puzzles
+[X] Add quit
+[ ] Add timer
+[ ] Add completion percent
+[ ] Add finish statistics
+[ ] Add sort by difficulty
+[ ] Add permently solved 
+[ ] Add score
+[ ] Add profile
+[ ] Add different puzzles

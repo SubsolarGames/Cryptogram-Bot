@@ -58,7 +58,7 @@ async def solve(ctx, a: str, b: str):
         await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
     else:
         puzzle = puzzles[username]
-        solved[username][0][a[0]] = b[0]
+        solved[username][0][a[0].lower()] = b[0].lower()
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username]))
@@ -73,12 +73,86 @@ async def undo(ctx, letter: str):
         await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
     else:
         puzzle = puzzles[username]
-        solved[username][0][letter[0]] = "_"
+        solved[username][0][letter[0].lower()] = "_"
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username]))
         
-     
+
+@commands.command()
+async def reset(ctx):
+    global puzzles
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username] = new_solve(puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username]))
+        
+
+@commands.command()
+async def hint(ctx):
+    global puzzles
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+
+        if check_win(puzzle, solved[username]):
+            await ctx.send("There are no more hints")
+        else:
+            chosen_letter = None
+            while chosen_letter == None:
+                chosen_letter = random.choice([i for i in ALPHABET])
+                if solved[username][0][chosen_letter] == puzzle[1][chosen_letter] or chosen_letter not in puzzle[0]:
+                    chosen_letter = None
+
+            solved[username][0][chosen_letter] = puzzle[1][chosen_letter]
+            solved[username] = update_solve(solved[username], puzzle)
+            
+            await ctx.send(disp(puzzle, solved[username]))
+        
+        
+@commands.command()
+async def done(ctx):
+    global puzzles
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+    
+        if check_win(puzzle, solved[username]):
+            puzzles.pop(username)
+            await ctx.send("You solved the **puzzle**! ✅")
+        else:
+            await ctx.send("That's an **inncorrect** answer ❗️")
+
+
+@commands.command()
+async def end(ctx):
+    global puzzles
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+    
+        solved[username][0] = puzzle[1]
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        puzzles.pop(username)
+        
+        await ctx.send(f"You ended the puzzle here's the **answer**:\n`{solved[username][1].upper()}`")
+
+            
 async def setup(bot):
     bot.add_command(freq)
     bot.add_command(word)
@@ -86,3 +160,7 @@ async def setup(bot):
     bot.add_command(puzzle)
     bot.add_command(solve)
     bot.add_command(undo)
+    bot.add_command(reset)
+    bot.add_command(hint)
+    bot.add_command(end)
+    bot.add_command(done)

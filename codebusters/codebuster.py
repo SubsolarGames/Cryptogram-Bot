@@ -184,7 +184,8 @@ def update_solve(solve, cryptogram):
     return [solve[0], solve_string]
 
 
-def quote_to_code(quote):
+def quote_to_code(full_quote):
+    quote = full_quote['text']
     key = {}
     
     unused = ALPHABET
@@ -201,7 +202,7 @@ def quote_to_code(quote):
         quote = quote.replace(i, key[i].upper())
     quote = quote.replace("π", '"')
     
-    return [quote.lower(), dict(map(reversed, key.items()))]
+    return [quote.lower(), dict(map(reversed, key.items())), full_quote]
 
 
 def check_win(cryptogram, solve):
@@ -253,8 +254,19 @@ def disp_freq(freq):
     return txt
 
 
-def disp(puzzle, solved):
-    return f"`{code_to_text(puzzle)}{solved[1].upper()}\n{disp_freq(get_freq(puzzle))}`"
+def disp(puzzle, solved, time):
+    done = 0
+    not_done = 0
+    for char in solved[1]:
+        if char in ALPHABET or char == "_":
+            if char == "_":
+                not_done += 1
+            else:
+                done += 1
+    
+    complete = int((done / (not_done+done)) * 100)
+            
+    return f"`Time: `**`{round(time,2)}`**`        Completion: `**`{complete}%`**`        Difficulty: `**`{round(puzzle[2]['difficulty']-1, 2)}`**`\n\n{code_to_text(puzzle)}{solved[1].upper()}\n{disp_freq(get_freq(puzzle))}`"
 
 
 def get_quotes_of_diff(diff_min, diff_max):
@@ -291,7 +303,6 @@ def main():
     read_txt(f)
     f = open("codebusters/quotes2.txt", "r")
     read_txt(f)
-    
-     
+
 
 main()

@@ -9,6 +9,7 @@ from codebusters.codebuster import *
 logger = settings.logging.getLogger("bot")
 puzzles = {}
 solved = {}
+times = {}
 
 
 def run():
@@ -36,7 +37,7 @@ def run():
     @bot.command()
     async def help(ctx):
         commands = ["!freq [letter]|displays the `**`frequency`**` of a letter", "!freq all|displays the all `**`frequency`**` of letters", "!word [word]|displays the `**`frequency`**` of a word"]
-        puzzle_commands = [ "!new|creates a new `**`puzzle`**`", "!puzzle|displays current `**`puzzle`**`", "!solve [letter] [letter]|changes the `**`cypher letter`**` into the `**`real letter`**`", "!undo [letter]|reverts the `**`cypher letter`**` to a blank", "!reset|resets the puzzle to a `**`blank`**`", "!hint|solves one `**`letter`**` for the player", "!end|exits the current puzzle and shows the `**`answer`**`", "!done|checks the `**`answer`**` and ends the puzzle"]
+        puzzle_commands = [ "!new [difficulty 1-10]|creates a new `**`puzzle`**`", "!puzzle|displays current `**`puzzle`**`", "!solve [letter] [letter]|changes the `**`cypher letter`**` into the `**`real letter`**`", "!undo [letter]|reverts the `**`cypher letter`**` to a blank", "!reset|resets the puzzle to a `**`blank`**`", "!hint|solves one `**`letter`**` for the player", "!end|exits the current puzzle and shows the `**`answer`**`", "!done|checks the `**`answer`**` and ends the puzzle"]
         txt = "Hello! 👋🏼\nI'm the cryptogram bot here to help **codebusters** ✅\n\nHere are the **general** commands:`\n"
         
         most = 0
@@ -64,7 +65,7 @@ def run():
             to_space = lambda x: "".join([" " for k in range(x)])
             
             txt += "`**`" + l[0] + "`**`" + to_space(spacing) + l[1] + '\n'
-            
+        txt += "`"
         await ctx.send(txt)
 
 

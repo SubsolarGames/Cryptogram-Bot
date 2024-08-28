@@ -4,6 +4,8 @@ from codebusters.codebuster import *
 from discord.ext import commands
 from main import puzzles
 from main import solved
+from main import times
+import time
 
 
 @commands.command()
@@ -23,17 +25,29 @@ async def word(ctx, word):
 
 
 @commands.command()
-async def new(ctx):
+async def new(ctx, diff: int):
     global puzzles
     global solved
     username = f"{ctx.message.author.name}"
     
-    if username not in puzzles:
-        puzzles[username] = quote_to_code(random.choice(quotes)['text'])
-        solved[username] = new_solve(puzzles[username])
-        await ctx.send(disp(puzzles[username], solved[username]))
+    
+    if diff not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
+        await ctx.send("Enter a **difficulty** from 1-10! ❗️")
     else:
-        await ctx.send("You are already in a **puzzle**!\nCheck it with **!puzzle**")
+    
+        if username not in puzzles:
+            
+            if diff != 10:
+                quote_range= get_quotes_of_diff(diff+1, diff+2)
+            else:
+                quote_range= get_quotes_of_diff(diff+1, diff+5)
+            
+            puzzles[username] = quote_to_code(random.choice(quote_range))
+            solved[username] = new_solve(puzzles[username])
+            times[username] = time.time()
+            await ctx.send(disp(puzzles[username], solved[username], time.time() - times[username]))
+        else:
+            await ctx.send("You are already in a **puzzle**!\nCheck it with **!puzzle**")
         
 
 @commands.command()
@@ -46,7 +60,7 @@ async def puzzle(ctx):
         await ctx.send("You need to create a **puzzle** first!\nUse **!new**")
     else:
         puzzle = puzzles[username]
-        await ctx.send(disp(puzzle, solved[username]))
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
         
 
 @commands.command()
@@ -61,7 +75,7 @@ async def solve(ctx, a: str, b: str):
         solved[username][0][a[0].lower()] = b[0].lower()
         solved[username] = update_solve(solved[username], puzzle)
         
-        await ctx.send(disp(puzzle, solved[username]))
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
         
 
 @commands.command()
@@ -76,7 +90,7 @@ async def undo(ctx, letter: str):
         solved[username][0][letter[0].lower()] = "_"
         solved[username] = update_solve(solved[username], puzzle)
         
-        await ctx.send(disp(puzzle, solved[username]))
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
         
 
 @commands.command()
@@ -90,7 +104,7 @@ async def reset(ctx):
         puzzle = puzzles[username]
         solved[username] = new_solve(puzzle)
         
-        await ctx.send(disp(puzzle, solved[username]))
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
         
 
 @commands.command()
@@ -115,7 +129,7 @@ async def hint(ctx):
             solved[username][0][chosen_letter] = puzzle[1][chosen_letter]
             solved[username] = update_solve(solved[username], puzzle)
             
-            await ctx.send(disp(puzzle, solved[username]))
+            await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
         
         
 @commands.command()
@@ -130,6 +144,7 @@ async def done(ctx):
     
         if check_win(puzzle, solved[username]):
             puzzles.pop(username)
+     
             await ctx.send("You solved the **puzzle**! ✅")
         else:
             await ctx.send("That's an **inncorrect** answer ❗️")

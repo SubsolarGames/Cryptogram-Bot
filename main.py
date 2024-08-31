@@ -23,11 +23,8 @@ def run():
 
     @bot.event
     async def on_ready():
-        
-        
-        for cmd_file in ["codebusters.codebuster.py"]:
-            if cmd_file != "__init__.py":
-                await bot.load_extension(f"cmds.{cmd_file[:-3]}")
+        await bot.load_extension(f"cmds.codebuster_commands")
+    
     
     @bot.event
     async def on_command_error(ctx, error):

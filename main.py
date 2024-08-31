@@ -7,7 +7,6 @@ from codebusters.codebuster import *
 import webserver
 
 
-logger = settings.logging.getLogger("bot")
 puzzles = {}
 solved = {}
 times = {}
@@ -24,7 +23,7 @@ def run():
 
     @bot.event
     async def on_ready():
-        logger.info(f"User: {bot.user} (ID: {bot.user.id})")
+        
         
         for cmd_file in settings.CMDS_DIR.glob("*.py"):
             if cmd_file.name != "__init__.py":

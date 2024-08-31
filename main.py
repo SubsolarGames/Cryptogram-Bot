@@ -25,7 +25,7 @@ def run():
     async def on_ready():
         
         
-        for cmd_file in settings.CMDS_DIR.glob("*.py"):
+        for cmd_file in ["codebusters/codebuster.py"]:
             if cmd_file.name != "__init__.py":
                 await bot.load_extension(f"cmds.{cmd_file.name[:-3]}")
     

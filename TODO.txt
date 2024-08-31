@@ -5,10 +5,11 @@
 [X] Add timer
 [X] Add completion percent
 [X] Add sort by difficulty
-[ ] Add permently solved 
-[ ] Add score
-[ ] Add finish statistics
-[ ] Add profile
-[ ] Add leaderboard
+[X] Add permently solved 
+[X] Add score
+[X] Highlight new solved letters
+[X] Add finish statistics
+[X] Add profile
+[X] Add leaderboard
 [ ] Add collab
 [ ] Add different puzzles

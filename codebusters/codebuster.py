@@ -161,27 +161,40 @@ def new_solve(cryptogram):
     solve = {}
     for i in ALPHABET:
         solve[i] = "_"
-    
+    other_string = ""
     solve_string = ""
     for char in cryptogram[0]:
         if char in ALPHABET:
             solve_string += solve[char]
+            
         else:
             solve_string += char
+        other_string += " "
+        
     solve_string += "\n"
-    return [solve, solve_string] 
+    return [solve, solve_string, [], [], other_string] 
 
 
 def update_solve(solve, cryptogram):
     solve_string = ""
+    other_string = ""
+    new_letters =[]
     for char in cryptogram[0]:
         if char in ALPHABET:
-            solve_string += solve[0][char]
+            if char not in solve[3] and solve[0][char] != "_":
+                new_letters.append(char)
+                other_string += "|"
+                solve_string += solve[0][char]
+            else:
+                other_string += " "
+                solve_string += solve[0][char]
         else:
+            other_string += " "
             solve_string += char
+            
     solve_string += "\n"
 
-    return [solve[0], solve_string]
+    return [solve[0], solve_string, new_letters, solve[3]+new_letters, other_string]
 
 
 def quote_to_code(full_quote):
@@ -258,6 +271,7 @@ def disp(puzzle, solved, time):
     done = 0
     not_done = 0
     for char in solved[1]:
+        
         if char in ALPHABET or char == "_":
             if char == "_":
                 not_done += 1
@@ -266,7 +280,7 @@ def disp(puzzle, solved, time):
     
     complete = int((done / (not_done+done)) * 100)
             
-    return f"`Time: `**`{round(time,2)}`**`        Completion: `**`{complete}%`**`        Difficulty: `**`{round(puzzle[2]['difficulty']-1, 2)}`**`\n\n{code_to_text(puzzle)}{solved[1].upper()}\n{disp_freq(get_freq(puzzle))}`"
+    return f"`Time: `**`{round(time,2)}`**`        Completion: `**`{complete}%`**`        Difficulty: `**`{round(puzzle[2]['difficulty']-1, 2)}`**`\n\n{code_to_text(puzzle)}{solved[4]}\n{solved[1].upper()}\n{disp_freq(get_freq(puzzle))}`"
 
 
 def get_quotes_of_diff(diff_min, diff_max):

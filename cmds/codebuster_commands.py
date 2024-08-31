@@ -5,9 +5,25 @@ from discord.ext import commands
 from main import puzzles
 from main import solved
 from main import times
+from main import profile
 import time
 
 
+@commands.command()
+async def member(ctx):
+    global profile
+    
+    if ctx.message.author.name not in profile:
+        profile[ctx.message.author.name] = {
+            "comp": [],
+            "score": 0
+        }
+
+        await ctx.send(f"Welcome **{ctx.author.name}**! Try **!help** for the commands.")
+    else:
+        await ctx.send(f"You already have an account!\nCheck it with `!prof`")
+    
+    
 @commands.command()
 async def freq(ctx, letter):
     if letter == 'all':
@@ -28,27 +44,40 @@ async def word(ctx, word):
 async def new(ctx, diff: int):
     global puzzles
     global solved
+    global profile
+    
     username = f"{ctx.message.author.name}"
     
-    
-    if diff not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
-        await ctx.send("Enter a **difficulty** from 1-10! ❗️")
-    else:
-    
-        if username not in puzzles:
-            
-            if diff != 10:
-                quote_range= get_quotes_of_diff(diff+1, diff+2)
-            else:
-                quote_range= get_quotes_of_diff(diff+1, diff+5)
-            
-            puzzles[username] = quote_to_code(random.choice(quote_range))
-            solved[username] = new_solve(puzzles[username])
-            times[username] = time.time()
-            await ctx.send(disp(puzzles[username], solved[username], time.time() - times[username]))
-        else:
-            await ctx.send("You are already in a **puzzle**!\nCheck it with **!puzzle**")
+    if username in profile:
         
+        if diff not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
+            await ctx.send("Enter a **difficulty** from 1-10! ❗️")
+        else:
+            if username not in puzzles:
+                
+                if diff != 10:
+                    quote_range = get_quotes_of_diff(diff+1, diff+2)
+                else:
+                    quote_range = get_quotes_of_diff(diff+1, diff+5)
+                
+                for i in profile[username]['comp']:
+                    if i[2] in quote_range:
+                        quote_range.remove(i[2])
+                
+                if quote_range == []:
+                    await ctx.send("You have already solved all the puzzles of that **difficulty**")
+                else:
+                    puzzles[username] = quote_to_code(random.choice(quote_range))
+   
+                    solved[username] = new_solve(puzzles[username])
+                    times[username] = time.time()
+                    
+                    await ctx.send(disp(puzzles[username], solved[username], time.time() - times[username]))
+            else:
+                await ctx.send("You are already in a **puzzle**!\nCheck it with **!puzzle**")
+    else:
+        await ctx.send("Please **setup** an account!\nUse `!member`")
+
 
 @commands.command()
 async def puzzle(ctx):
@@ -135,6 +164,8 @@ async def hint(ctx):
 @commands.command()
 async def done(ctx):
     global puzzles
+    global profile
+    global times
     username = f"{ctx.message.author.name}"
     
     if username not in puzzles:
@@ -143,16 +174,67 @@ async def done(ctx):
         puzzle = puzzles[username]
     
         if check_win(puzzle, solved[username]):
+            profile[username]['comp'].append(puzzles[username])
+            score_gain  = int((puzzles[username][2]['difficulty'] * 1000) / (time.time() - times[username]))
+            profile[username]['score'] += score_gain
+            
             puzzles.pop(username)
-     
-            await ctx.send("You solved the **puzzle**! ✅")
+            await ctx.send(f"You solved the **puzzle**! ✅\n\nIt took you **{round(time.time() - times[username], 2)}** seconds ⏰\nThis earns you **{score_gain}** points 🪙!")
+            
         else:
             await ctx.send("That's an **inncorrect** answer ❗️")
+
+@commands.command()
+async def prof(ctx, who="NONE"):
+    global profile
+    
+    if who == "NONE":
+        who = ctx.message.author.name
+        
+    if who in profile:
+        txt = ""
+        txt += f"User: **{who}**\n"
+        txt += f"Points: **{profile[who]['score']}** 🪙"
+        await ctx.send(txt)
+    else:
+        await ctx.send(f"**{who}** has not set up an account❗️")
+
+
+@commands.command()
+async def lead(ctx):
+    global profile
+    
+    if profile != {}:
+        rankings = {}
+        
+        for i in profile:
+            rankings[profile[i]['score']] = i
+
+        rankings_list = sorted(rankings.keys(), reverse=True)
+
+        txt = "Leaderboard ⭐️\n"
+        for i in range(0, 10):
+            if i < len(rankings_list):
+                bonus = ""
+                if i == 0:
+                    bonus = "🥇"
+                elif i == 1:
+                    bonus = "🥈"
+                else:
+                    bonus = "🥉"
+                    
+                txt += f"`[`**`{i+1}`**`] {rankings[rankings_list[i]]}        `**`{rankings_list[i]}`**` " + bonus + "`\n"
+                
+        await ctx.send(txt)
+    else:
+        await ctx.send("No rankings yet")
 
 
 @commands.command()
 async def end(ctx):
     global puzzles
+    global profile
+    
     username = f"{ctx.message.author.name}"
     
     if username not in puzzles:
@@ -162,8 +244,10 @@ async def end(ctx):
     
         solved[username][0] = puzzle[1]
         solved[username] = update_solve(solved[username], puzzle)
-        
+
+        profile[username]['comp'].append(puzzles[username])        
         puzzles.pop(username)
+
         
         await ctx.send(f"You ended the puzzle here's the **answer**:\n`{solved[username][1].upper()}`")
 
@@ -179,3 +263,6 @@ async def setup(bot):
     bot.add_command(hint)
     bot.add_command(end)
     bot.add_command(done)
+    bot.add_command(member)
+    bot.add_command(prof)
+    bot.add_command(lead)

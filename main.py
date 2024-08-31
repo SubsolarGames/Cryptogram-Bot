@@ -26,8 +26,8 @@ def run():
         
         
         for cmd_file in ["codebusters/codebuster.py"]:
-            if cmd_file.name != "__init__.py":
-                await bot.load_extension(f"cmds.{cmd_file.name[:-3]}")
+            if cmd_file != "__init__.py":
+                await bot.load_extension(f"cmds.{cmd_file[:-3]}")
     
     @bot.event
     async def on_command_error(ctx, error):

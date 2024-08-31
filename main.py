@@ -74,5 +74,6 @@ def run():
     bot.run(settings.DISCORD_API_SECRET, root_logger=True)
     
 
-webserver.keep_alive()
-run()
+if __name__ == "__main__":
+    webserver.keep_alive()
+    run()

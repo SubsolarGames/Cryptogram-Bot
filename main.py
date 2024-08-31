@@ -4,6 +4,7 @@ import math
 import discord
 from discord.ext import commands
 from codebusters.codebuster import *
+import webserver
 
 
 logger = settings.logging.getLogger("bot")
@@ -73,5 +74,5 @@ def run():
     bot.run(settings.DISCORD_API_SECRET, root_logger=True)
     
 
-if __name__ == "__main__":
-    run()
+webserver.keep_alive()
+run()

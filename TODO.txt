@@ -11,5 +11,9 @@
 [X] Add finish statistics
 [X] Add profile
 [X] Add leaderboard
+[X] Fix the leaderboard
+[X] Fix the points system
 [ ] Add collab
 [ ] Add different puzzles
+[ ] Export to pdf
+[ ] Generate tests

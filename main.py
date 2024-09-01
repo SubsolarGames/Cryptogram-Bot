@@ -7,6 +7,7 @@ from codebusters.codebuster import *
 import webserver
 
 
+hints = {}
 puzzles = {}
 solved = {}
 times = {}

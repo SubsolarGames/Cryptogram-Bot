@@ -2,10 +2,12 @@ import sys
 sys.path.append("../")
 from codebusters.codebuster import *
 from discord.ext import commands
+import math
 from main import puzzles
 from main import solved
 from main import times
 from main import profile
+from main import hints
 import time
 
 
@@ -54,6 +56,7 @@ async def new(ctx, diff: int):
             await ctx.send("Enter a **difficulty** from 1-10! ❗️")
         else:
             if username not in puzzles:
+                hints[username] = 0
                 
                 if diff != 10:
                     quote_range = get_quotes_of_diff(diff+1, diff+2)
@@ -110,6 +113,7 @@ async def solve(ctx, a: str, b: str):
 @commands.command()
 async def undo(ctx, letter: str):
     global puzzles
+    
     username = f"{ctx.message.author.name}"
     
     if username not in puzzles:
@@ -144,11 +148,13 @@ async def hint(ctx):
     if username not in puzzles:
         await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
     else:
+        
         puzzle = puzzles[username]
 
         if check_win(puzzle, solved[username]):
             await ctx.send("There are no more hints")
         else:
+            hints[username] += 1
             chosen_letter = None
             while chosen_letter == None:
                 chosen_letter = random.choice([i for i in ALPHABET])
@@ -175,7 +181,7 @@ async def done(ctx):
     
         if check_win(puzzle, solved[username]):
             profile[username]['comp'].append(puzzles[username])
-            score_gain  = int((puzzles[username][2]['difficulty'] * 1000) / (time.time() - times[username]))
+            score_gain  = int((puzzles[username][2]['difficulty'] * 1000) / ((time.time() - times[username]) ** (1/3)) + hints[username])
             profile[username]['score'] += score_gain
             
             puzzles.pop(username)
@@ -207,14 +213,16 @@ async def lead(ctx):
     if profile != {}:
         rankings = {}
         
+        
         for i in profile:
-            rankings[profile[i]['score']] = i
+            rankings[i] = profile[i]['score']
 
-        rankings_list = sorted(rankings.keys(), reverse=True)
+        rankings = sorted(rankings.items(), key=lambda x: -x[1])
+        
 
         txt = "Leaderboard ⭐️\n"
         for i in range(0, 10):
-            if i < len(rankings_list):
+            if i < len(rankings):
                 bonus = ""
                 if i == 0:
                     bonus = "🥇"
@@ -223,7 +231,7 @@ async def lead(ctx):
                 else:
                     bonus = "🥉"
                     
-                txt += f"`[`**`{i+1}`**`] {rankings[rankings_list[i]]}        `**`{rankings_list[i]}`**` " + bonus + "`\n"
+                txt += f"`[`**`{i+1}`**`] {i}        `**`{rankings[i]}`**` " + bonus + "`\n"
                 
         await ctx.send(txt)
     else:

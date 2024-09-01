@@ -231,7 +231,7 @@ async def lead(ctx):
                 else:
                     bonus = "🥉"
                     
-                txt += f"`[`**`{i+1}`**`] {i}        `**`{rankings[i]}`**` " + bonus + "`\n"
+                txt += f"`[`**`{i+1}`**`] {i}        `**`{rankings[i][0]}`**` " + bonus + "`\n"
                 
         await ctx.send(txt)
     else:

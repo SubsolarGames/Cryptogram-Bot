@@ -211,7 +211,6 @@ def quote_to_code(full_quote):
                 correct_index += 1
             key[i] = key[prev[correct_index]]
             key[prev[correct_index]] = letter
-            
         else:
                 
             while letter == i:

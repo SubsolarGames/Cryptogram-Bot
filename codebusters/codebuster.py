@@ -200,16 +200,27 @@ def update_solve(solve, cryptogram):
 def quote_to_code(full_quote):
     quote = full_quote['text']
     key = {}
+    prev = []
     
-    unused = ALPHABET
+    unused = list(ALPHABET)
     for i in ALPHABET:
-        letter = random.choice(list(unused))
-        while letter == i:
-            letter = random.choice(list(unused))
+        letter = random.choice(unused)
+        if len(unused) == 1 and i == letter:
+            correct_index = 0
+            while unused[0] == prev[correct_index]:
+                correct_index += 1
+            key[i] = key[prev[correct_index]]
+            key[prev[correct_index]] = letter
+            
+        else:
+                
+            while letter == i:
+                letter = random.choice(unused)
 
-        key[i] = letter
+            key[i] = letter
         
-        unused = unused.replace(letter, '')
+        unused.remove(letter)
+        prev.append(i)
         
     for i in key:
         quote = quote.replace(i, key[i].upper())

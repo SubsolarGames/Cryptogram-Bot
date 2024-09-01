@@ -20,6 +20,7 @@ def run():
     intents.members = True
     intents.presences = True
     
+    
     bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
 
     @bot.event

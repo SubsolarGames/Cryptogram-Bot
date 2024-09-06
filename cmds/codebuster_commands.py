@@ -94,7 +94,7 @@ async def puzzle(ctx):
         puzzle = puzzles[username]
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
         
-
+@commands.command()
 async def a(ctx, b: str):
     global puzzles
     a = "a"
@@ -109,6 +109,7 @@ async def a(ctx, b: str):
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
 
+@commands.command()
 async def b(ctx, b: str):
     global puzzles
     a = "b"
@@ -123,6 +124,7 @@ async def b(ctx, b: str):
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
 
+@commands.command()
 async def c(ctx, b: str):
     global puzzles
     a = "c"
@@ -137,6 +139,7 @@ async def c(ctx, b: str):
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
 
+@commands.command()
 async def d(ctx, b: str):
     global puzzles
     a = "d"
@@ -150,7 +153,7 @@ async def d(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def e(ctx, b: str):
     global puzzles
     a = "e"
@@ -164,7 +167,7 @@ async def e(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def f(ctx, b: str):
     global puzzles
     a = "f"
@@ -178,7 +181,7 @@ async def f(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def g(ctx, b: str):
     global puzzles
     a = "g"
@@ -192,7 +195,7 @@ async def g(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def h(ctx, b: str):
     global puzzles
     a = "h"
@@ -206,7 +209,7 @@ async def h(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def i(ctx, b: str):
     global puzzles
     a = "i"
@@ -220,7 +223,7 @@ async def i(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def j(ctx, b: str):
     global puzzles
     a = "j"
@@ -234,7 +237,7 @@ async def j(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def k(ctx, b: str):
     global puzzles
     a = "k"
@@ -248,7 +251,7 @@ async def k(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def l(ctx, b: str):
     global puzzles
     a = "l"
@@ -262,7 +265,7 @@ async def l(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def m(ctx, b: str):
     global puzzles
     a = "m"
@@ -276,7 +279,7 @@ async def m(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def n(ctx, b: str):
     global puzzles
     a = "n"
@@ -290,7 +293,7 @@ async def n(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def o(ctx, b: str):
     global puzzles
     a = "o"
@@ -304,7 +307,7 @@ async def o(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def p(ctx, b: str):
     global puzzles
     a = "p"
@@ -318,7 +321,7 @@ async def p(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def q(ctx, b: str):
     global puzzles
     a = "q"
@@ -332,7 +335,7 @@ async def q(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def r(ctx, b: str):
     global puzzles
     a = "r"
@@ -346,7 +349,7 @@ async def r(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def s(ctx, b: str):
     global puzzles
     a = "s"
@@ -360,7 +363,7 @@ async def s(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def t(ctx, b: str):
     global puzzles
     a = "t"
@@ -374,7 +377,7 @@ async def t(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def u(ctx, b: str):
     global puzzles
     a = "u"
@@ -388,7 +391,7 @@ async def u(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def v(ctx, b: str):
     global puzzles
     a = "v"
@@ -402,7 +405,7 @@ async def v(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def w(ctx, b: str):
     global puzzles
     a = "w"
@@ -416,7 +419,7 @@ async def w(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def x(ctx, b: str):
     global puzzles
     a = "x"
@@ -430,7 +433,7 @@ async def x(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def y(ctx, b: str):
     global puzzles
     a = "y"
@@ -444,7 +447,7 @@ async def y(ctx, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
-
+@commands.command()
 async def z(ctx, b: str):
     global puzzles
     a = "z"

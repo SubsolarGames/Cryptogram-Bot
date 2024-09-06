@@ -37,7 +37,7 @@ def run():
     @bot.command()
     async def help(ctx):
         commands = ["!member|creates a new `**`account`**` for the user", "!help|shows all the `**`commands`**`", "!prof|shows your `**`profile`**`", "!prof [user]|shows a users `**`profile`**`", "!lead|shows the `**`leaderboard`**`", "!freq [letter]|displays the `**`frequency`**` of a letter", "!freq all|displays the all `**`frequency`**` of letters", "!word [word]|displays the `**`frequency`**` of a word"]
-        puzzle_commands = ["!new [difficulty 1-10]|creates a new `**`puzzle`**`", "!puzzle|displays current `**`puzzle`**`", "!solve [letter] [letter]|changes the `**`cypher letter`**` into the `**`real letter`**`", "!undo [letter]|reverts the `**`cypher letter`**` to a blank", "!reset|resets the puzzle to a `**`blank`**`", "!hint|solves one `**`letter`**` for the player", "!end|exits the current puzzle and shows the `**`answer`**`", "!done|checks the `**`answer`**` and ends the puzzle"]
+        puzzle_commands = ["!new [difficulty 1-10]|creates a new `**`puzzle`**`", "!puzzle|displays current `**`puzzle`**`", "![letter] [letter]|changes the `**`cypher letter`**` into the `**`real letter`**`", "!undo [letter]|reverts the `**`cypher letter`**` to a blank", "!reset|resets the puzzle to a `**`blank`**`", "!hint|solves one `**`letter`**` for the player", "!end|exits the current puzzle and shows the `**`answer`**`", "!done|checks the `**`answer`**` and ends the puzzle"]
         txt = "Hello! 👋🏼\nI'm the cryptogram bot here to help **codebusters** ✅\n\nHere are the **general** commands:`\n"
         
         most = 0

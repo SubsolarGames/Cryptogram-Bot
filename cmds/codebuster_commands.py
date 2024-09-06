@@ -95,9 +95,9 @@ async def puzzle(ctx):
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
         
 
-@commands.command()
-async def solve(ctx, a: str, b: str):
+async def a(ctx, b: str):
     global puzzles
+    a = "a"
     username = f"{ctx.message.author.name}"
     
     if username not in puzzles:
@@ -108,7 +108,358 @@ async def solve(ctx, a: str, b: str):
         solved[username] = update_solve(solved[username], puzzle)
         
         await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def b(ctx, b: str):
+    global puzzles
+    a = "b"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
         
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def c(ctx, b: str):
+    global puzzles
+    a = "c"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def d(ctx, b: str):
+    global puzzles
+    a = "d"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def e(ctx, b: str):
+    global puzzles
+    a = "e"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def f(ctx, b: str):
+    global puzzles
+    a = "f"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def g(ctx, b: str):
+    global puzzles
+    a = "g"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def h(ctx, b: str):
+    global puzzles
+    a = "h"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def i(ctx, b: str):
+    global puzzles
+    a = "i"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def j(ctx, b: str):
+    global puzzles
+    a = "j"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def k(ctx, b: str):
+    global puzzles
+    a = "k"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def l(ctx, b: str):
+    global puzzles
+    a = "l"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def m(ctx, b: str):
+    global puzzles
+    a = "m"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def n(ctx, b: str):
+    global puzzles
+    a = "n"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def o(ctx, b: str):
+    global puzzles
+    a = "o"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def p(ctx, b: str):
+    global puzzles
+    a = "p"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def q(ctx, b: str):
+    global puzzles
+    a = "q"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def r(ctx, b: str):
+    global puzzles
+    a = "r"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def s(ctx, b: str):
+    global puzzles
+    a = "s"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def t(ctx, b: str):
+    global puzzles
+    a = "t"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def u(ctx, b: str):
+    global puzzles
+    a = "u"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def v(ctx, b: str):
+    global puzzles
+    a = "v"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def w(ctx, b: str):
+    global puzzles
+    a = "w"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def x(ctx, b: str):
+    global puzzles
+    a = "x"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def y(ctx, b: str):
+    global puzzles
+    a = "y"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+async def z(ctx, b: str):
+    global puzzles
+    a = "z"
+    username = f"{ctx.message.author.name}"
+    
+    if username not in puzzles:
+        await ctx.send("You need to have a **puzzle** first!\nUse **!new**")
+    else:
+        puzzle = puzzles[username]
+        solved[username][0][a[0].lower()] = b[0].lower()
+        solved[username] = update_solve(solved[username], puzzle)
+        
+        await ctx.send(disp(puzzle, solved[username], time.time() - times[username]))
+
+
 
 @commands.command()
 async def undo(ctx, letter: str):
@@ -265,7 +616,6 @@ async def setup(bot):
     bot.add_command(word)
     bot.add_command(new)
     bot.add_command(puzzle)
-    bot.add_command(solve)
     bot.add_command(undo)
     bot.add_command(reset)
     bot.add_command(hint)
@@ -274,3 +624,30 @@ async def setup(bot):
     bot.add_command(member)
     bot.add_command(prof)
     bot.add_command(lead)
+    
+    bot.add_command(a)
+    bot.add_command(b)
+    bot.add_command(c)
+    bot.add_command(d)
+    bot.add_command(e)
+    bot.add_command(f)
+    bot.add_command(g)
+    bot.add_command(h)
+    bot.add_command(i)
+    bot.add_command(j)
+    bot.add_command(k)
+    bot.add_command(l)
+    bot.add_command(m)
+    bot.add_command(n)
+    bot.add_command(o)
+    bot.add_command(p)
+    bot.add_command(q)
+    bot.add_command(r)
+    bot.add_command(s)
+    bot.add_command(t)
+    bot.add_command(u)
+    bot.add_command(v)
+    bot.add_command(w)
+    bot.add_command(x)
+    bot.add_command(y)
+    bot.add_command(z)
